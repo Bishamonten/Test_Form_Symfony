@@ -1,0 +1,20 @@
+#index:
+#    path: /
+#    defaults: { _controller: 'App\Controller\DefaultController::index' }
+
+# first, run composer req annotations
+#controllers:
+#    resource: ../src/Controller/
+#    type: annotation
+
+personne_index:
+    path: /person
+    defaults: { _controller: 'App\Controller\PersonController::index' }
+
+personne_new:
+    path: /person/new
+    defaults: { _controller: 'App\Controller\PersonController::new_' }
+
+personne_new_two:
+    path: /person/newtwo
+    defaults: { _controller: 'App\Controller\PersonController::newGetPostAction' }
