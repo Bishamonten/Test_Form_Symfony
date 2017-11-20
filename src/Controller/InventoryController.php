@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Calculate\Inventory as InvPersonne;
 
 class InventoryController extends Controller {
     public function new_(Request $request){
-
         $inventory = new Inventory();
         $inventory->setNbItem(0);
 
@@ -38,10 +38,15 @@ class InventoryController extends Controller {
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
+            $validator = new InvPersonne($em);
+            $validator->setPerson($inventory->getPerson());
+            $validator->setInventory($inventory);
             $em->persist($inventory);
-            $em->flush();
-            $this->container->get('session')->GetFlashBag()->add('kek', 'You got it m8, good job.');
-            //return $this->redirectToRoute('person');
+            if($validator->calcul()) {
+                $em->flush();
+                $this->container->get('session')->GetFlashBag()->add('kek', 'You got it m8, good job.');
+                //return $this->redirectToRoute('person');
+            }
         }
 
         return $this->render(
