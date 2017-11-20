@@ -37,28 +37,37 @@ class Person
      * @var int
      * @ORM\Column(type="integer")
      */
-    protected $age;
+    protected $max_weight;
+
     /**
-     * @var boolean
-     * @ORM\Column(type="boolean")
+     * @var Inventory[]
+     * @ORM\OneToMany(targetEntity="inventories", mappedBy="person")
+     * @ORM\Column(nullable=true)
      */
-    protected $visible;
+    protected $inventories;
+
     /**
-     * @var \DateTime
-     * @ORM\Column(type="date")
+     * @return Inventory[]
      */
-    protected $created_at;
+    public function getInventories(): array
+    {
+        return $this->inventories;
+    }
+
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=40)
+     * @param Inventory[] $inventories
      */
-    protected $color;
+    public function setInventories(array $inventories)
+    {
+        $this->inventories = $inventories;
+    }
+
+
 
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -66,7 +75,7 @@ class Person
     /**
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -74,7 +83,7 @@ class Person
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -82,76 +91,31 @@ class Person
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-
     /**
      * @return int
      */
-    public function getAge()
+    public function getMaxWeight(): int
     {
-        return $this->age;
+        return $this->max_weight;
     }
 
     /**
-     * @param int $age
+     * @param int $max_weight
      */
-    public function setAge($age)
+    public function setMaxWeight(int $max_weight)
     {
-        $this->age = $age;
+        $this->max_weight = $max_weight;
     }
 
-    /**
-     * @return bool
-     */
-    public function isVisible()
+    public function __toString()
     {
-        return $this->visible;
+        return $this->name;
     }
-
-    /**
-     * @param bool $visible
-     */
-    public function setVisible($visible)
-    {
-        $this->visible = $visible;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * @param \DateTime $created_at
-     */
-    public function setCreatedAt($created_at)
-    {
-        $this->created_at = $created_at;
-    }
-
-    /**
-     * @return string
-     */
-    public function getColor()
-    {
-        return $this->color;
-    }
-
-    /**
-     * @param string $color
-     */
-    public function setColor($color)
-    {
-        $this->color = $color;
-    }
-
 
 
 }

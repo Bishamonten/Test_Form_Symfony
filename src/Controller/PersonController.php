@@ -24,14 +24,11 @@ class PersonController extends Controller
 
         $person = new Person();
         $person->setName('salut');
-        $person->setCreatedAt(new \DateTime('now'));
+        $person->setMaxWeight(0);
 
         $form = $this->createFormBuilder($person)
             ->add('name', TextType::class)
-            ->add('age', IntegerType::class)
-            ->add('color', TextType::class)
-            ->add('visible', CheckboxType::class)
-            ->add('createdAt', DateType::class)
+            ->add('max_weight', IntegerType::class)
             ->add('save', SubmitType::class, array('label' => 'creer'))
             ->getForm();
         $form->handleRequest($request);
@@ -49,6 +46,8 @@ class PersonController extends Controller
 
         public function newGetPostAction(Request $request){
             $person = new Person();
+            $person->setName('salut');
+            $person->setMaxWeight(0);
             $form = $this->createForm(EntityType::class, $person);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()) {
