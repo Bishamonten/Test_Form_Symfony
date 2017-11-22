@@ -42,3 +42,15 @@ inventory_new:
 inventory_new_two:
     path: /inventory/newtwo
     defaults: { _controller: 'App\Controller\InventoryController::newGetPostAction' }
+
+fight:
+    path: /fight
+    defaults: { _controller: 'App\Controller\FightController::indexAction' }
+
+player_list:
+    path: /
+    defaults: { _controller: 'App\Controller\PlayerController::indexAction' }
+
+player_new:
+    path: /player_new
+    defaults: { _controller: 'App\Controller\PlayerController::playerNew' }
